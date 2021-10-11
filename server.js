@@ -17,11 +17,11 @@ mongoose.connect(mongoDbStr, {
     useNewUrlParser: true
 });
 mongoose.set('useFindAndModify', false);
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 app.use(express.static("public"));
 app.use(require('express-session')({
     secret: "My name is MD Ripon Islam",
@@ -35,27 +35,18 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(function(user, cb) {
     cb(null, user);
 });
-
 passport.deserializeUser(function(obj, cb) {
     cb(null, obj);
 });
 
-
-
 var sl = require("./routs/signup-login");
 app.use(sl);
+
 
 http.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
 app.use(express.static(__dirname + '/public'))
-
-
-
-
-
-
-
 
 app.get('/',middlewares.isLoggedIn, (req, res) => {
     res.render('index',{user: req.user})
@@ -72,8 +63,7 @@ var onlineUsers = [];
 
 
 
-// 6161e39f81639e10747e312c
-// Socket 
+
 const io = require('socket.io')(http)
 io.on('connection', (socket) => {
     console.log('Connected...')
@@ -96,13 +86,7 @@ io.on('connection', (socket) => {
         io.to(data.id).emit('erteERERDCXZ', onlineUsers);
     })
 
-    socket.on('disconnect', function(s) {
-
-        // socket.emit('disconnected');
-        // online = online - 1;
-// console.log(s);
-
-    });
+    socket.on('disconnect', function(s) {});
 
 
 
@@ -126,4 +110,4 @@ setTimeout(() => {
 
 cryptoRandomString = require('crypto-random-string')
 
- // console.log(cryptoRandomString(5))
+ console.log(cryptoRandomString(5))

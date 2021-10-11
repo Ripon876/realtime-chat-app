@@ -5,14 +5,22 @@ let messageArea = document.querySelector('.message__area')
 // do {
 //     name = prompt('Please enter your name: ')
 // } while(!name)
-
+var toId;
 textarea.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
-        sendMessage(e.target.value)
+        sendMessage(e.target.value,toId)
     }
 })
 
-function sendMessage(message) {
+
+
+
+
+   //================
+  // send messages |
+ //==================
+
+function sendMessage(message,id) {
     document.title = "Message sent.."
     let msg = {
         from: {
@@ -20,36 +28,44 @@ function sendMessage(message) {
             id: uid
         },
         to: {
-            id: "6161e39f81639e10747e312c"
+            id: id
         },
         message: message.trim()
     };
-    let apmsg = {
+  var apmsg = {
+    msg: message.trim(),
+    from: {
         user: "You",
-        message: message.trim()
     }
-    // Append 
-    // appendMessage(apmsg, 'outgoing')
-    textarea.value = ''
-    // scrollToBottom()
+}
+var idstr = "thred-" + id;
 
-    // Send to server 
+    appendMessage(apmsg, 'outgoing',id)
+    textarea.value = ''
+    scrollToBottom(idstr)
+
+
     socket.emit('message', msg)
 
 }
 
+
+
+   //================
+  // append messages |
+ //==================
 function appendMessage(msg, type, elemId) {
 
 
 
     document.title = "New Message..."
 
-    let mainDiv = document.createElement('div')
-    let className = type
-    mainDiv.classList.add(className, 'message')
+    let mainDiv = document.createElement('div');
+    let className = type;
+    mainDiv.classList.add(className, 'message');
 
     let markup = `
-        <h4>${msg.from.user}</h4>
+        
         <p>${msg.msg}</p>
     `
     mainDiv.innerHTML = markup;
@@ -92,20 +108,6 @@ function appendMessage(msg, type, elemId) {
 
 
 socket.on("connect", function() {
-
-
-    /*let msg = {
-            user: "You",
-            message: "You are now connected to this chart"
-        }
-        appendMessage(msg, 'outgoing')*/
-    // scrollToBottom()
-    console.log("connected");
-
-    /*let fm = {
-        user: name,
-        message: `${name} is now connected to this chart`
-    } */
     socket.emit('join', {
         username: uname,
         id: uid
@@ -115,16 +117,6 @@ socket.on("connect", function() {
     // socket.emit('join', {username: uname, id: uid});  
     // },5000)
     // socket.emit('message', fm)
-
-    /*$(window).bind('beforeunload', function(event) {
-        return "You have unsaved work, it will be lost if you leave this page.";
-        console.log(event);
-    });
-    */
-
-    // socket.on('disconnect', function(){
-    //     alert("disconected")
-    // });
 
 
 })
@@ -137,18 +129,12 @@ socket.on('message', (msg) => {
         user: msg.from.user,
         message: msg.msg,
     }
-    var idstr = '#thred-' + msg.from.id;
+    var idstr = 'thred-' + msg.from.id;
+    toId = msg.from.id;
+    $("#thredPerson").text($(`#${msg.from.id}`).text())
     appendMessage(msg, 'incoming', msg.from.id);
     scrollToBottom(idstr)
 })
-
-// Recieve persoanl  messages 
-/*socket.on('personal', (msg) => {
-    console.log(msg)
-    appendMessage(msg, 'incoming')
-
-    scrollToBottom()
-})*/
 
 // Recieve new user data 
 socket.on('erteERERDCXZ', (users) => {
@@ -158,7 +144,7 @@ socket.on('erteERERDCXZ', (users) => {
         if (user.id !== uid) {
 
             if ($(`#${user.id}`).length == 0) {
-                $(".userlist").append(`<li id="${user.id}" onclick="createThred()">${user.username}</li>`);
+                $(".userlist").append(`<li id="${user.id}" onclick="createThred(id)">${user.username}</li>`);
             }
 
         }
@@ -169,6 +155,25 @@ socket.on('erteERERDCXZ', (users) => {
 })
 
 function scrollToBottom(id) {
-    // messageArea.scrollTop = messageArea.scrollHeight
-    document.querySelector(id).scrollTop = document.querySelector(id).scrollHeight;
+    document.querySelector(`#${id}`).scrollTop = document.querySelector(`#${id}`).scrollHeight;
 };
+
+
+function createThred(id) {
+
+    var idstr = 'thred-' + id;
+    toId = id;
+    $("#thredPerson").text($(`#${id}`).text())
+    if ($(`#${idstr}`).length) {
+        $(`#${idstr}`).nextAll().hide();
+        $(`#${idstr}`).prevAll().hide();
+        $(`#${idstr}`).show();
+        scrollToBottom(idstr)
+    } else {
+        $(".main_area").append(`<div id="${idstr}" class="message__area"></div>`);
+        $(`#${idstr}`).nextAll().hide();
+        $(`#${idstr}`).prevAll().hide();
+        $(`#${idstr}`).show();
+    }
+
+}

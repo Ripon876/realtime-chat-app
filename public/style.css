@@ -55,6 +55,7 @@ textarea {
     margin-bottom: 40px;
     max-width: 300px;
     position: relative;
+    width: fit-content;
 }
 .incoming {
     background: #8F8BE8;
@@ -72,6 +73,50 @@ textarea {
     color: #333;
     font-size: 14px;
 }
+.incoming.message::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background: #8f8be8;
+    top: 0px;
+    left: -15px;
+    border-radius: 4px;
+}
+.incoming.message::after {
+    content: "";
+    width: 20px;
+    height: 28px;
+    position: absolute;
+    background: white;
+    top: 2px;
+    transform: rotate(136deg);left: -26px;
+}
+
+
+.outgoing.message::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: #e9eafd;
+    top: 0px;
+    position: absolute;
+    border-radius: 4px;
+    right: -17px;
+}
+.outgoing.message::after {
+    content: "";
+    width: 20px;
+    height: 28px;
+    position: absolute;
+    background: white;
+    top: 5px;
+    transform: rotate(45deg);
+    border-radius: 20px;
+    right: -25px;
+}
+
+
 .sidebar ul li{
     width: 100%;
     background: white;
