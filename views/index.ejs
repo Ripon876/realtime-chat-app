@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wassup chat app</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div class="sidebar" style="width: 200px;height: 500px;background: #f1f1f1;border: 2px solid #8f8be8;">
+    <ul class="userlist"></ul>
+</div>
+<section class="chat__section">
+    <div class="brand">
+        <img height="40" src="/wassup.png" alt="">
+        <h1>Ripon</h1>
+    </div>
+    <div class="main_area">
+        <div class="message__area" id="starthere"></div>
+    </div>
+    
+    
+    
+    <div>
+        <textarea id="textarea" cols="30" rows="1" placeholder="Write a message..."></textarea>
+    </div>
+</section>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var uid  = "<%= user._id %>";
+var uname = "<%= user.name %>";
+</script>
+<script src="/client.js"></script>
+</body>
+</html>

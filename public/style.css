@@ -37,6 +37,7 @@ section.chat__section {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    overflow-x: hidden;
     padding-top: 40px;
 }
 textarea {
@@ -70,4 +71,15 @@ textarea {
     left: 0;
     color: #333;
     font-size: 14px;
+}
+.sidebar ul li{
+    width: 100%;
+    background: white;
+    border-top: 1px solid #f1f1f1;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 10px;
+}
+ .sidebar ul  li:hover {
+    background: #8f8be8 !important;
+    box-shadow: 1px 0px 11px 0px #8f8be8;
 }
