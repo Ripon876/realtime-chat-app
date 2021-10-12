@@ -1,4 +1,5 @@
-const express = require('express')
+var dotenv = require('dotenv').config();
+const express = require('express');
 var passport = require("passport");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
