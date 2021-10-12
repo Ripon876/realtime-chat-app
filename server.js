@@ -93,21 +93,8 @@ io.on('connection', (socket) => {
 })
 
 
-
-process.on('message', msg => {
-    console.log(`Message from master: ${msg}`);
-});
-
 /*
 setTimeout(() => {
   process.exit(1) // death by random timeout
 }, Math.random() * 10000);*/
 
-
-
-
-
-
-cryptoRandomString = require('crypto-random-string')
-
- console.log(cryptoRandomString(5))
