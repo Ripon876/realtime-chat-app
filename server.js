@@ -13,6 +13,14 @@ const http = require('http').createServer(app);
 
 mongoDbStr = "mongodb://localhost:27017/chat";
 
+if(process.env.MONGODB_URI){
+    mongoDbStr  = process.env.MONGODB_URI;
+}
+
+
+
+
+
 mongoose.connect(mongoDbStr, {
     useUnifiedTopology: true,
     useNewUrlParser: true
