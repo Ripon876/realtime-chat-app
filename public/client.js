@@ -81,7 +81,6 @@ function appendMessage(msg, type, elemId) {
 
         $(`#${idstr}`).nextAll().hide()
         $(`#${idstr}`).prevAll().hide()
-
         $(`#${idstr}`).append(mainDiv);
         $(`#${idstr}`).show();
 
@@ -94,15 +93,12 @@ function appendMessage(msg, type, elemId) {
 
         $(`#${idstr}`).nextAll().hide()
         $(`#${idstr}`).prevAll().hide()
-
-
         $(`#${idstr}`).append(mainDiv);
         $(`#${idstr}`).show();
 
     }
 
 
-    // messageArea.appendChild(mainDiv)
 }
 
 
