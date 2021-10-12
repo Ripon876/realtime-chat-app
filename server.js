@@ -17,7 +17,7 @@ mongoose.connect(mongoDbStr, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 });
-mongoose.set('useFindAndModify', false);
+
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
